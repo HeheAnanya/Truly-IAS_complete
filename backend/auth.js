@@ -61,7 +61,7 @@ function base64urlDecode(value) {
 }
 
 function getJwtSecret() {
-  return process.env.JWT_SECRET || "local-development-jwt-secret-change-before-deploy";
+  return process.env.JWT_SECRET
 }
 
 function signJwt(payload, expiresInSeconds = JWT_TTL_SECONDS) {
