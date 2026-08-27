@@ -55,15 +55,22 @@ function setSessionCookie(res, session) {
         `secureid_session=${encodeURIComponent(session.sessionId)}`,
         "Path=/",
         "HttpOnly",
-        "SameSite=Lax",
+        "SameSite=None",
+        "Secure",
     ];
-    if (process.env.NODE_ENV === "production") parts.push("Secure");
-    if (session.rememberMe) parts.push("Max-Age=2592000");
+
+    if (session.rememberMe) {
+        parts.push("Max-Age=2592000");
+    }
+
     res.setHeader("Set-Cookie", parts.join("; "));
 }
 
 function clearSessionCookie(res) {
-    res.setHeader("Set-Cookie", "secureid_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0");
+    res.setHeader(
+        "Set-Cookie",
+        "secureid_session=; Path=/; HttpOnly; SameSite=None; Secure; Max-Age=0"
+    );
 }
 
 async function getSessionUser(req) {
