@@ -12,8 +12,7 @@ const QRCode = require("qrcode");
 
 const app = express();
 
-const allowedOrigins = (process.env.FRONTEND_ORIGINS ||
-    "http://localhost:3000,https://ananya-secureid2.vercel.app")
+const allowedOrigins = (process.env.FRONTEND_ORIGINS)
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
