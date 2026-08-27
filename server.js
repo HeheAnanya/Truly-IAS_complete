@@ -12,7 +12,7 @@ const QRCode = require("qrcode");
 
 const app = express();
 
-const allowedOrigins = (process.env.FRONTEND_ORIGINS)
+const allowedOrigins = (process.env.FRONTEND_ORIGINS || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
