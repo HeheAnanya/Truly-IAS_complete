@@ -83,9 +83,6 @@ function updateStepper(screenName) {
     }
   });
 }
-// ------------------------------------------------------------
-// Initial screen
-// ------------------------------------------------------------
 const initialScreen = location.hash.replace("#", "") || "reg-details";
 showScreen(initialScreen, { pushHistory: false });
 
@@ -96,7 +93,8 @@ showScreen(initialScreen, { pushHistory: false });
         const current = document.querySelector(".screen.active")?.dataset.screen;
         if (current !== "dashboard") {
             const loaded = await loadDashboard();
-            if (loaded) protectDashboardHistory();
+            if (loaded) {showScreen("dashboard");
+                protectDashboardHistory();}
         }
     } else if (initialScreen === "dashboard") {
         history.replaceState({ screen: "login-placeholder" }, "", "#login-placeholder");
@@ -366,7 +364,9 @@ document.getElementById("form-otp").addEventListener("submit", async (e) => {
     } else if (otpState.purpose === "login-email" || otpState.purpose === "login-sms") {
         const loaded = await loadDashboard();
         otpState.loginTicket = null;
-        if (loaded) protectDashboardHistory();
+        if (loaded) {
+            showScreen("dashboard");
+            protectDashboardHistory();}
     }
 });
 
